@@ -435,7 +435,11 @@ inline Quat<T> Quat<T>::log() const
     // Rendering Techniques by Watt and Watt, Page 366:
     //
 
+#ifdef WIN32
+    T theta = Math<T>::acos (min (r, (T) 1.0));
+#else
     T theta = Math<T>::acos (std::min (r, (T) 1.0));
+#endif
 
     if (theta == 0)
 	return Quat<T> (0, v);
